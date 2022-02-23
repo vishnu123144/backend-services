@@ -1,0 +1,24 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+      - id: login-service
+        uri: lb://LOGIN-SERVICE
+        predicates:
+        - Path=/login/**
+      - id: registration-service
+        uri: lb://REGISTRATION-SERVICE
+        predicates:
+        - Path=/registration/**          
+      
+
+#to make application as eureka client
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true    
